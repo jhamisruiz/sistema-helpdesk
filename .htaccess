@@ -1,0 +1,50 @@
+Options +FollowSymLinks
+#Options All -Indexes
+
+RewriteEngine On
+RewriteRule ^([-a-zA-Z0-9-]+)$ index.php?ruta=$1
+
+##RewriteRule ^/?$ index.php?page=index [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+###### configs Requests
+RewriteRule ^v1/config/?$ app/src/v1/config/config.ng.php? [L,QSA]
+#####PEIDOS
+###get list
+RewriteRule ^v1/pedidos/([0-9]+)/?$ app/src/v1/pedidos/pedidos.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+###post
+RewriteRule ^v1/pedidos/?$ app/src/v1/pedidos/pedidos.ng.php? [L,QSA]
+#####  USUARIOS
+###get list
+RewriteRule ^v1/usuarios/([0-9]+)/?$ app/src/v1/users/usuarios.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+###post
+RewriteRule ^v1/usuarios/?$ app/src/v1/users/usuarios.ng.php? [L,QSA]
+
+#####  CLIENTES
+###get list
+RewriteRule ^v1/clientes/([0-9]+)/?$ app/src/v1/clientes/clientes.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+###post
+RewriteRule ^v1/clientes/?$ app/src/v1/clientes/clientes.ng.php? [L,QSA]
+
+RewriteRule ^v1/developer/?$ app/controllers/pedidos/categorias.C.php?
+######************************************
+######************************************
+# RewriteRule ^movimientos/detalle-movmimiento-exel/([0-9]+)/?$ app/src/ajax/files/exel.php?idruta=$1&nam=$2&idmov=$3 [L,QSA]
+# RewriteRule ^movimientos/detalle-movmimiento-pdf/([0-9]+)/?$ app/src/ajax/files/pdf.php?idruta=$1&nam=$2&idmov=$3 [L,QSA]
+
+# RewriteRule ^movimientos/detalle-movmimiento-exel/([-a-zA-Z]+)/?$ resources/error/404.php?idruta=$1&nam=$2&idmov=$3 [L,QSA]
+# RewriteRule ^movimientos/detalle-movmimiento-pdf/([-a-zA-Z]+)/?$ resources/error/404.php?idruta=$1&nam=$2&idmov=$3 [L,QSA]
+
+ErrorDocument 500 "Sorry, our url not found" 
+ErrorDocument 500 /resources/error/500.php 
+ErrorDocument 404 "Sorry, our url not found" 
+ErrorDocument 401 /resources/error/401.php 
+<IfModule mod_setenvif.c>
+  <IfModule mod_headers.c>
+    <FilesMatch "\.(avifs?|bmp|cur|gif|ico|jpe?g|jxl|a?png|svgz?|webp)$">
+      SetEnvIf Origin ":" IS_CORS
+      Header set Access-Control-Allow-Origin "*" env=IS_CORS
+    </FilesMatch>
+  </IfModule>
+</IfModule> 
