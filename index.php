@@ -1,51 +1,15 @@
 <?php
-/* ***** ******* CONFIG ****************** */
-require './app/config/config.php';
-require "./app/models/conexPDO.php";
+if (file_exists('.env')) {
+        require "app/php/Core.php";
 
-/* =====================================================================
-        MODEL ...
-========================================================================*/
-require_once "app/models/query/querys.M.php";
-// require_once "app/models/query/SPquerys.M.php";
+        APP_DIRS::GET_ALL_APP_DIRS('app/config', 'require', 'php');
 
-/// PEDIDOS
-require_once "app/models/pedidos/pedidos.M.php";
-/* =====================================================================
-        MODEL USUARIOS....
-========================================================================*/
-require_once "app/models/clientes/clientes.M.php";
-require_once "app/models/users/usuarios.M.php";
-/* =====================================================================
-      
------CONTROLLER-----
-========================================================================*/
-require_once "app/controllers/config/config.C.php";
-require_once "app/controllers/query/querys.C.php";
-/* =====================================================================
-        PEDIDOS CONTROLLER 
-========================================================================*/
-require_once "app/controllers/pedidos/pedidos.C.php";
-require_once "app/controllers/pedidos/categorias.C.php";
-/* =====================================================================
-        USUARIOS CONTROLLER 
-========================================================================*/
-require_once "app/controllers/clientes/clientes.C.php";
-require_once "app/controllers/users/usuarios.C.php";
-
-
-/* ----------------------------------------------------------
-   ---------------------login---------------------------------- */
-require_once "app/controllers/login/login.C.php";
-/* ----------------------------------------------------------
-   -----------------------FUNCTIONS----------------------------------- */
-require_once "app/php/functions.php";
-
-
-/* =====================================================================
-        CONTROLLER main app
-========================================================================*/
-require_once "app/controllers/main.C.php";
+        APP_DIRS::GET_ALL_APP_DIRS('app/controllers', 'require_once', 'php');
+        APP_DIRS::GET_ALL_APP_DIRS('app/models', 'require_once', 'php');
+} else {
+        echo 'archivo de configiguracion .evn no EXISTE!';
+        exit;
+}
 
 $main = new ControllerMain();
 $main->ctrMain();

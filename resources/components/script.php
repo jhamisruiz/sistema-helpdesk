@@ -1,10 +1,7 @@
 <!-- js para peticion ajaxs o funciones-->
-<script type="text/javascript" src="app/src/js/pedidos/pedidos.js"></script>
-<script type="text/javascript" src="app/src/js/clientes/clientes.js"></script>
-<script type="text/javascript" src="app/src/js/users/usuarios.js"></script>
-<script type="text/javascript" src="app/src/js/users/login.js"></script>
-<script type="text/javascript" src="app/src/js/config/config.js"></script>
-
+<?php
+APP_DIRS::GET_ALL_APP_DIRS('app/src/js', '', 'js');
+?>
 <!-- <script type="text/javascript" src="app/src/js/login/login.js"></script> -->
 <!-- js para peticion ajaxs o funciones-->
 
@@ -36,7 +33,7 @@
 // }
 
 ?>
-<script src="public/assets/js/main.js"></script> <!-- //correguir con inicio de sesion -->
+ <!-- //correguir con inicio de sesion -->
 
 
 <!--================= DataTables  & Plugins / print files ============-->

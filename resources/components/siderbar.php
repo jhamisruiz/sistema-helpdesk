@@ -12,8 +12,8 @@ if (isset($_GET["ruta"])) {
 
 ?>
 
-<div id="sidebar" class="active">
-    <div class="sidebar-wrapper active">
+<div id="sidebar" class="d-none">
+    <div class="sidebar-wrapper ">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">

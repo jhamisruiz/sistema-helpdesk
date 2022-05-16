@@ -20,7 +20,12 @@ RewriteRule ^v1/pedidos/?$ app/src/v1/pedidos/pedidos.ng.php? [L,QSA]
 RewriteRule ^v1/usuarios/([0-9]+)/?$ app/src/v1/users/usuarios.ng.php?start=$1&length=$2$search=$3 [L,QSA]
 ###post
 RewriteRule ^v1/usuarios/?$ app/src/v1/users/usuarios.ng.php? [L,QSA]
-
+#####  LOGIN
+###get list
+###post
+RewriteRule ^v1/login/?$ app/src/v1/users/login.ng.php? [L,QSA]
+###post
+RewriteRule ^v1/sign-up/?$ app/src/v1/users/login.ng.php? [L,QSA]
 #####  CLIENTES
 ###get list
 RewriteRule ^v1/clientes/([0-9]+)/?$ app/src/v1/clientes/clientes.ng.php?start=$1&length=$2$search=$3 [L,QSA]

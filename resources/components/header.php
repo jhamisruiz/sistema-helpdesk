@@ -1,7 +1,7 @@
 <header class='mb-3'>
     <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid">
-            <a href="#" class="burger-btn d-block">
+            <a href="#" class="burger-btn d-block d-none">
                 <i class="bi bi-justify fs-3"></i>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start border border-primary" aria-labelledby="dropdownMenuButton">
                         <li>
-                            <h6 id="idnames_last" class="dropdown-header">
+                            <h6 class="idnames_last dropdown-header">
                             </h6>
 
                         </li>
