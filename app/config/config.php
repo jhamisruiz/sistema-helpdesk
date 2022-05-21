@@ -50,7 +50,7 @@ class DotEnv
     $parts= array(
         "www"   =>  getenv('APP_URL'),
         "src"   =>  "",
-        "logo"   =>  "",
+        "logo"   =>  getenv("APP_LOGO"),
         "_file" =>  getenv('_FILE'),
     );
 
@@ -75,7 +75,7 @@ class DotEnv
 
 define("URL_HOST_WEB", $host);
 define("FOLDER_URL_IMG_ALMACEN", $parts["_file"]);
-
+define("APP_LOGO", $parts["logo"]);
 /* ////////////////////////////////////////////////////////// */
 
 define("HOST", $DATABSE["HOST"]);

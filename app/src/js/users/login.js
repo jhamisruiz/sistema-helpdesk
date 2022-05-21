@@ -21,7 +21,7 @@ login.controller('ctrLogin', function ($scope, $http, $window) {
             if (sms['login'] == 'OK') {
                 $scope.loginOK = sms['sms'];
                 $window.sessionStorage.setItem('user', JSON.stringify(sms['user']));
-                window.location.reload();
+                window.location.assign('/');
             }
             if (sms['login'] == 'ERROR') {
                 $scope.error = sms['sms'];
@@ -33,15 +33,19 @@ login.controller('ctrLogin', function ($scope, $http, $window) {
     }
 });
 
-
 try {
     var data = JSON.parse(sessionStorage.getItem('user'));
     var idnames = document.getElementById('idnames');
     var iduser_ses = document.getElementById('iduser_ses');
-    var idnames_last = document.getElementById('idnames_last');
+    var idnames_last = document.getElementsByClassName('idnames_last');
+
     idnames.innerHTML=data['names'];
     iduser_ses.innerHTML = data['user_name'];
-    idnames_last.innerHTML = data['names'] + '<br>' + data['last_name'];
+
+    for (let i = 0; i < idnames_last.length; i++) {
+        idnames_last[i].innerHTML = data['names'] + '<br>' + data['last_name'];
+        
+    }
 
     function closeSession() {
         sessionStorage.removeItem("user");

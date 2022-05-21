@@ -2,5 +2,4 @@
 
 	session_destroy();
 
-	echo '<script>window.location.replace("' . URL_HOST_WEB . '/");</script>';
-?>
+	echo '<script>window.location.replace("' . URL_HOST_WEB . '/login");</script>';

@@ -7,7 +7,7 @@
         <div class="col-lg-5 col-12">
             <div id="auth-left">
                 <div class="auth-logo">
-                    <a><img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f916.svg" style="height:80px" alt="Logo"></a>
+                    <a><img src="<?= APP_LOGO ?>" style="height:80px" alt="Logo"></a>
                 </div>
                 <h1 class="auth-title">Login</h1>
                 <h5 ng-if="loginOK" class="text-success">Bienvenido {{loginOK}}
@@ -37,9 +37,13 @@
                     </div>
                     <button ng-click="LoginFunc()" onke type="button" class="btn btn-primary btn-block btn-lg shadow-lg mt-5 btnLogin" ng-disabled="!loginForm.$valid">Login</button>
                 </form>
+                <div class="text-center mt-5 text-lg fs-4">
+                    <p class="text-gray-600">No tengo una cuenta? <a href="sign-up" class="font-bold">Registrar</a>.</p>
+                    <!-- <p><a class="font-bold" href="auth-forgot-password.html">Se te olvidó tu contraseña?.</a>.</p> -->
+                </div>
             </div>
         </div>
-        <div class="col-lg-7 ">
+        <div class="col-lg-7 "><!--  -->
             <div id="auth-right">
             </div>
         </div>

@@ -1,5 +1,5 @@
-<?php  
-  session_start();
+<?php
+session_start();
 class ControllerMain
 {
 
@@ -11,26 +11,27 @@ class ControllerMain
 
         <head>
             <?php
-            include "resources/parts/links-css.php";
+            include "resources/components/links-css.php";
             ?>
         </head>
 
         <body>
             <?php
-                $sgbd = Conexion::tryConex();
+            $sgbd = Conexion::tryConex();
 
-                if ($sgbd["error"] == "error") {
+            if ($sgbd["error"] == "error") {
 
-                    include "resources/error/sgbd.php";
-                } else {
-                    if (isset($_SESSION["loginSession"])&& $_SESSION["loginSession"]=="OK") {
+                include "resources/error/sgbd.php";
+            } else {
+                if (isset($_SESSION["loginSession"]) && $_SESSION["loginSession"] == "OK") {
 
-                    ?>
+            ?>
                     <div id="app">
-                            <?php include "resources/parts/siderbar.php";?>
-                        <div id="main" class='layout-navbar'>
+                        <?php include "resources/components/siderbar.php"; ?>
+                        <div id="main" class="d-none"></div>
+                        <div class='layout-navbar '>
                             <?php
-                            include "resources/parts/header.php";
+                            include "resources/components/header.php";
                             ?>
                             <div id="main-content">
                                 <?php
@@ -41,23 +42,24 @@ class ControllerMain
                     </div>
 
                     <div id="smsconfirmations"></div>
-                    <?php
-                    
-                }else{
+                    <script src="public/assets/js/main.js"></script>
+            <?php
+
+                } else {
                     if (isset($_GET["ruta"])) {
-                        if ($_GET["ruta"] == "login" ||$_GET["ruta"] == "registro"){
+                        if ($_GET["ruta"] == "login" || $_GET["ruta"] == "sign-up") {
                             include "resources/views/login/" . $_GET["ruta"] . ".php";
-                        }else{
+                        } else {
                             include "resources/views/login/login.php";
                         }
-                    }else{
-                        include "resources/views/login/login.php";
+                    } else {
+                        include "resources/views/index/head.php";
+                        include "resources/views/index/index.php";
                     }
-                    
                 }
-             }
-                include "resources/parts/script.php";
-            
+            }
+            include "resources/components/script.php";
+
             ?>
 
         </body>
