@@ -1,4 +1,4 @@
-<div>
+<div ng-app="app-Index" ng-controller="ctrIndex">
     <div class="page-heading">
         <!-- Main content -->
         <section class="content">
@@ -27,9 +27,10 @@
                                 <label for="upload" class="form-group__label">
                                     <span class="form-group__text">Arrastra o pega</span>
                                     o busca una imagen
-                                    <input type="file" id="upload" class="form-group__control">
+                                    <input type="file" onchange="angular.element(this).scope().uploadIndexImg(event)" id="upload" class="form-group__control" multiple accept="image/png,image/jpg,image/*">
                                 </label>
                             </div>
+                            <div class="form-group" id="img_preview"></div>
                             <div class="form-group mt-4 mb-4">
                                 <button onclick="asdasd()" type="button" class="btn btn-primary w-25">Enviar</button>
                             </div>
