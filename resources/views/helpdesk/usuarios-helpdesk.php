@@ -94,76 +94,56 @@
                                     <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <div class=" discussion ">
-                                <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
+                            <div class=" discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)">
+                                <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
                                     <div class="online"></div>
                                 </div>
                                 <div class="desc-contact">
-                                    <p class="name">Megan Leib</p>
-                                    <p class="message">9 pm at the bar if possible 😳</p>
+                                    <p class="name">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
+                                    <p class="message">{{lc.mensaje }}</p>
                                 </div>
-                                <div class="timer">12 sec</div>
+                                <div class="timer">{{lc.fecha_registro }}</div>
+
                             </div>
 
-                            <div class="discussion">
-                                <div class="photo" style="background-image: url(https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg);">
-                                    <div class="online"></div>
-                                </div>
-                                <div class="desc-contact">
-                                    <p class="name">Dave Corlew</p>
-                                    <p class="message">Let's meet for a coffee or something today ?</p>
-                                </div>
-                                <div class="timer">3 min</div>
-                            </div>
-
-                            <div class="discussion">
-                                <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);">
-                                </div>
-                                <div class="desc-contact">
-                                    <p class="name">Jerome Seiber</p>
-                                    <p class="message">I've sent you the annual report</p>
-                                </div>
-                                <div class="timer">42 min</div>
-                            </div>
                         </section>
                     </div>
+                    <!-- SECCION DE CHAT F2F -->
                     <div class="col-lg-6 border border-primary p-0">
                         <section class="chat ">
                             <div class="header-chat">
                                 <i class="icon fa fa-user-o" aria-hidden="true"></i>
-                                <p class="name">Megan Leib</p>
+                                <p class="name">{{userNames}}</p>
                                 <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                             </div>
-                            <div class="messages-chat">
-                                <div class="message">
-                                    <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
-                                        <div class="online"></div>
+                            <div class="messages-chat" style="height: 425px;overflow-y: scroll;">
+                                <div ng-repeat="lf in listf2fChat">
+                                    <div class="message">
+                                        <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
+                                            <div class="online"></div>
+                                        </div>
+                                        <p class="text">{{lf.mensaje}} </p>
+
                                     </div>
-                                    <p class="text"> Hi, how are you ? </p>
+                                    <div class="message text-only">
+                                        <p class=""></p>
+                                        <div class="w-100 d-flex flex-wrap" ng-if="lf.img_length">
+
+                                            <div ng-repeat="img in lf.imagenes">
+                                                <img src="<?= URL_HOST_WEB ?>/{{img.url_img}}" width="500">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <p class="time"> {{lf.fecha_registro}}</p>
                                 </div>
-                                <div class="message text-only">
-                                    <p class="text"> What are you doing tonight ? Want to go take a drink ?</p>
-                                </div>
-                                <p class="time"> 14h58</p>
-                                <div class="message text-only">
+                                <!-- respuesta -->
+                                <!-- <div class="message text-only">
                                     <div class="response">
                                         <p class="text"> Hey Megan ! It's been a while 😃</p>
                                     </div>
-                                </div>
-                                <div class="message text-only">
-                                    <div class="response">
-                                        <p class="text"> When can we meet ?</p>
-                                    </div>
-                                </div>
-                                <p class="response-time time"> 15h04</p>
-                                <div class="message">
-                                    <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
-                                        <div class="online"></div>
-                                    </div>
-                                    <p class="text"> 9 pm at the bar if possible 😳</p>
-                                </div>
+                                </div> -->
 
-                                <p class="time"> 15h09</p>
                                 <div class="message text-only" ng-if="form.send">
                                     <div class="response">
                                         <p class="text"> {{form.send}}</p>

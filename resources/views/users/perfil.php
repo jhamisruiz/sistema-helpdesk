@@ -65,16 +65,26 @@
                                         <li class="nav-item w-25"><a class="nav-link rounded-0 border border-primary" href="#settings" data-toggle="tab">Settings</a></li>
                                         <li class="nav-item w-25"><a class="nav-link rounded-0 border border-primary" href="#activity" data-toggle="tab">Activity</a></li>
                                     </ul>
-                                </div><!-- /.card-header -->
+                                </div>
+                                <!-- The chat -->
+                                <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+                                <df-messenger intent="WELCOME" chat-title="helpdesk-contasoft" agent-id="f0ea39c1-475c-4dc2-9016-b0a4c830cae6" language-code="es"></df-messenger><!-- /.card-header -->
                                 <div class="card-body pt-3 pl-2">
                                     <div class="tab-content">
                                         <!-- /.tab-pane -->
                                         <div class="active tab-pane" id="chat">
+                                            <style>
+                                                df-messenger {
+                                                    --df-messenger-bot-message: #878fac;
+                                                    --df-messenger-button-titlebar-color: #df9b56;
+                                                    --df-messenger-chat-background-color: #fafafa;
+                                                    --df-messenger-font-color: white;
+                                                    --df-messenger-send-icon: #878fac;
+                                                    --df-messenger-user-message: #479b3d;
+                                                }
+                                            </style>
                                             <iframe allow="microphone;" class="w-100" height="530" src="https://console.dialogflow.com/api-client/demo/embedded/f0ea39c1-475c-4dc2-9016-b0a4c830cae6">
                                             </iframe>
-                                            <!-- The chat -->
-                                            <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-                                            <df-messenger intent="WELCOME" chat-title="helpdesk-contasoft" agent-id="f0ea39c1-475c-4dc2-9016-b0a4c830cae6" language-code="es"></df-messenger>
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class=" tab-pane" id="settings">

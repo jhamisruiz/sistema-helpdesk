@@ -64,7 +64,7 @@ class ModelQueryes
                 $orderby = $select["ORDER_BY"];
             }
             if (key($select) == "ORDERBY") {
-
+                
                 if (key($select["ORDERBY"]) == "ASC" || key($select["ORDERBY"]) == "DESC" and key($select["ORDERBY"]) != $select["ORDERBY"][key($select["ORDERBY"])]) {
 
                     $orderby = " ORDER BY " . $select["ORDERBY"][key($select["ORDERBY"])] . " " . key($select["ORDERBY"]);
@@ -72,6 +72,10 @@ class ModelQueryes
                 if ($select["ORDERBY"][key($select["ORDERBY"])] == "ASC" || $select["ORDERBY"][key($select["ORDERBY"])] == "DESC" and key($select["ORDERBY"]) != $select["ORDERBY"][key($select["ORDERBY"])]) {
 
                     $orderby = " ORDER BY " . key($select["ORDERBY"]) . " " . $select["ORDERBY"][key($select["ORDERBY"])];
+                }
+                if (isset($select["ORDERBY"]["sql"])) {
+
+                    $orderby = $select["ORDERBY"]["sql"];
                 }
             } else {
 
@@ -134,7 +138,7 @@ class ModelQueryes
 
             if ($stmt->execute()) {
 
-                return $stmt->fetchAll();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } else {
 
                 return  "SELECT $colums FROM $table  $wheres $orderby";
@@ -366,5 +370,31 @@ class ModelQueryes
 
         return $stmt->fetchAll();
         $stmt = null;
+    }
+    /* ================================================================
+    QUERY DELETE
+================================================================= */
+    /**
+     *@param $SQL
+     *); 
+     *@return [$QUERY];
+     */
+    static public function SQL($SQL)
+    {
+
+        try {
+            $stmt = Conexion::conectar()->prepare(" $SQL ");
+            if ($stmt->execute()) {
+                
+                $res=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $res;
+            } else {
+
+                return "$SQL";
+            }
+        } catch (\Throwable $th) {
+            $throw = $th->getMessage();
+            return $throw;
+        }
     }
 }
