@@ -1,6 +1,8 @@
 var index = angular.module('app-Index', ['ngAnimate', 'ngSanitize', 'ui.bootstrap',]);
 index.controller('ctrIndex', function ($scope, $http, $window) {
-
+    $scope.Index = {razon_social:'',email:'',numero:'',mensaje:''};
+    $scope.index = { razon_social: '', email: '', numero: '', mensaje: '' };
+    $scope.textarea=0;
     //////////////////cargar imagenes
     $scope.images = [];
     $scope.uploadIndexImg = function (e) {
@@ -12,8 +14,10 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
         e.target.value = '';
     }
     $scope.generaImages = function () {
+
         var imgPreview = document.getElementById('img_preview')
             , img, div, btn;
+        imgPreview.innerHTML = '';
         for (var i = 0; i < $scope.images.length; i++) {
 
             div = document.createElement('div');
@@ -56,14 +60,55 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
             imgPreview.appendChild(div);
         }
     }
-
+    $scope.vertextarea = function () {
+        var index = $scope.index;
+        var c = index.mensaje;
+        $scope.textarea = c.length;
+    }
     angular.element($window).bind("paste", function (e) {
-        var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
-        var blob = item.getAsFile();
-        $scope.images.push(blob);
-        $scope.generaImages();
+        try {
+            var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
+            var blob = item.getAsFile();
+            $scope.images.push(blob);
+            $scope.generaImages();
+        } catch (error) {
+            //error
+        }
 
     });
+
+    $scope.enviar = function (){
+        console.log($scope.index)
+        var form = $scope.index;
+        var images = $scope.images;
+        
+        var formt = new FormData();
+        ///guarda imagen una por una en el formdata
+        for (let i = 0; i < images.length; i++) {
+            formt.append(i, images[i]);
+        }
+        
+        formt.append('index', JSON.stringify(form));
+        formt.append('img_length', images.length);
+        formt.append('img_index', $scope.images);
+        formt.append('formulario', 'POST');
+        $http({
+            method: 'POST',
+            url: window.location.origin + '/v1/index',
+            data: formt,
+            headers: { 'Content-Type': undefined }
+        }).then(function success(response) {
+            console.log(response)
+            alertify.success("OK: solicitud enviada, revisa tu email:" + response.data+"");//alerta de guardado
+            $scope.index = JSON.parse(JSON.stringify($scope.Index));
+            $scope.respuesta = "Te enviaremos una respuesta a tu email: " + response.data + "."
+            $scope.images.length = 0;
+            $scope.images = [];
+            $scope.generaImages();
+        },
+            function error(response) { alertify.error("ERROR: no se envio la solicitud."); }
+        );
+    }
 });
 
 // window.addEventListener("paste", function (e) {
@@ -72,9 +117,3 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
 //     console.log(blob)
 
 // });
-
-
-function asdasd() {
-    alertify.error('Error: al enviar formulario');
-    console.log('asd')
-}

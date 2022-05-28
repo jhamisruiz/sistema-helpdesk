@@ -31,7 +31,16 @@ RewriteRule ^v1/sign-up/?$ app/src/v1/users/login.ng.php? [L,QSA]
 RewriteRule ^v1/clientes/([0-9]+)/?$ app/src/v1/clientes/clientes.ng.php?start=$1&length=$2$search=$3 [L,QSA]
 ###post
 RewriteRule ^v1/clientes/?$ app/src/v1/clientes/clientes.ng.php? [L,QSA]
-
+#####  INDEX
+###get list
+RewriteRule ^v1/index/([0-9]+)/?$ app/src/v1/index/index.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+###post
+RewriteRule ^v1/index/?$ app/src/v1/index/index.ng.php? [L,QSA]
+#####  HELPDESK
+###get list
+RewriteRule ^v1/helpdesk-chat/([0-9]+)/?$ app/src/v1/helpdesk/helpdesk.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+###post
+RewriteRule ^v1/helpdesk-chat/?$ app/src/v1/helpdesk/helpdesk.ng.php? [L,QSA]
 RewriteRule ^v1/developer/?$ app/controllers/pedidos/categorias.C.php?
 ######************************************
 ######************************************
