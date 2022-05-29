@@ -130,7 +130,7 @@
                                         <div class="w-100 d-flex flex-wrap" ng-if="lf.img_length">
 
                                             <div ng-repeat="img in lf.imagenes">
-                                                <img src="<?= URL_HOST_WEB ?>/{{img.url_img}}" width="500">
+                                                <img ng-src="<?= URL_HOST_WEB ?>/{{img.url_img}}" width="500">
                                             </div>
                                         </div>
 
