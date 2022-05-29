@@ -16,7 +16,7 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
         $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=').then(function (result) {
             var c = result.data;
             $scope.listChats=c
-            //$timeout(listaChat, 500);
+            $timeout(listaChat, 500);
         });
     }
     $scope.f2fChat = function (id){
@@ -24,9 +24,7 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
             var c = result.data;
             $scope.listf2fChat = c
             $scope.userNames = c[0].razon_social + '-' + c[0].names + '' + c[0].last_name
-            console.log(c)
         });
     }
-    $timeout(listaChat, 500);
 
 });
