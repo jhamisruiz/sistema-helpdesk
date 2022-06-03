@@ -5,13 +5,15 @@ class helpdeskController
     {
         ini_set('date.timezone', 'America/Lima');
         $fecha = date('Y-m-d H:i:s', time());
+
         $sql = "SELECT 
             H.id,H.id_cliente,  (select S.mensaje FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as mensaje,
             (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as fecha_registro,
             C.names,C.last_name, C.razon_social,C.phone,C.email
-            FROM chat H INNER JOIN $data C ON H.id_cliente=C.id
+            FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id
+            WHERE H.prioridad=$data
             GROUP BY H.id_cliente
-            ";
+        ";
         $chat = ModelQueryes::SQL($sql);
 
         for ($i = 0; $i < count($chat); $i++) {
@@ -41,8 +43,8 @@ class helpdeskController
             $date2 = new DateTime("now");
             $diff = $date1->diff($date2);
             //$id= $chat[$i]['id'];
-            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes" => ""], ["id_chat=" => $chat[$i]['id']]);
-            $chat[$i]['imagenes'] = $images;
+            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes"=>""], ["id_chat=" => $chat[$i]['id']]);
+            $chat[$i]['imagenes']= $images;
             $chat[$i]['img_length'] = count($images);
 
             $chat[$i]['fecha_registro'] = get_format($diff);
@@ -59,15 +61,15 @@ function get_format($df)
     $str .= ($df->invert == 1) ? ' - ' : '';
     if ($df->y > 0) {
         // years
-        $str .= ($df->y > 1) ? $df->y . ' Y' : $df->y . ' Y ';
+        $str .= ($df->y > 1) ? $df->y . ' Y ' : $df->y . ' Y ';
     }
     if ($df->m > 0) {
         // month
-        $str .= ($df->m > 1) ? $df->m . ' M' : $df->m . ' M';
+        $str .= ($df->m > 1) ? $df->m . ' M ' : $df->m . ' M ';
     }
     if ($df->d > 0) {
         // days
-        $str .= ($df->d > 1) ? $df->d . ' D' : $df->d . ' D ';
+        $str .= ($df->d > 1) ? $df->d . ' D ' : $df->d . ' D ';
     }
     if ($df->h > 0) {
         // hours
