@@ -14,7 +14,7 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
     var listaChat = function () {
         $http({
             method: 'GET',
-            url: window.location.origin + '/v1/helpdeskchat/0?length=lsChat&search='
+            url: window.location.origin + '/v1/helpdeskchat/0?length=lsf2dChatt&search='
         }).then(function (result) {
             var c = result.data;
             $scope.listChats = c
