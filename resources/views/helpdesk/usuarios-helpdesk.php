@@ -66,25 +66,15 @@
                                 </div>
                             </div>
 
-                            <div class="discussion">
-                                <div class="photo" style="background-image: url(https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg);">
-                                    <div class="online"></div>
+                            <div class="discussion " ng-repeat="lc in listPrioridad" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible">
+                                <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
+                                    <div class="online" id="{{lc.id_cliente}}"></div>
                                 </div>
-                                <div class="desc-contact">
-                                    <p class="name">Dave Corlew</p>
-                                    <p class="message">Let's meet for a coffee or something today ?</p>
+                                <div class="desc-contact" id="{{lc.id_cliente}}">
+                                    <p class="name" id="{{lc.id_cliente}}">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
+                                    <p class="message" id="{{lc.id_cliente}}">{{lc.mensaje }}</p>
                                 </div>
-                                <div class="timer">3 min</div>
-                            </div>
-
-                            <div class="discussion">
-                                <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);">
-                                </div>
-                                <div class="desc-contact">
-                                    <p class="name">Jerome Seiber</p>
-                                    <p class="message">I've sent you the annual report 😳</p>
-                                </div>
-                                <div class="timer">42 min</div>
+                                <div class="timer" id="{{lc.id_cliente}}">{{lc.fecha_registro }}</div>
                             </div>
                         </section>
                         <section class="discussions">
@@ -94,16 +84,15 @@
                                     <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <div class=" discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)">
-                                <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
-                                    <div class="online"></div>
+                            <div class="discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible">
+                                <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
+                                    <div class="online" id="{{lc.id_cliente}}"></div>
                                 </div>
-                                <div class="desc-contact">
-                                    <p class="name">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
-                                    <p class="message">{{lc.mensaje }}</p>
+                                <div class="desc-contact" id="{{lc.id_cliente}}">
+                                    <p class="name" id="{{lc.id_cliente}}">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
+                                    <p class="message" id="{{lc.id_cliente}}">{{lc.mensaje }}</p>
                                 </div>
-                                <div class="timer">{{lc.fecha_registro }}</div>
-
+                                <div class="timer" id="{{lc.id_cliente}}">{{lc.fecha_registro }}</div>
                             </div>
 
                         </section>
@@ -162,5 +151,14 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+    </div>
+    <div id="contextMenu" idchat="0" class="context-menu" style="display:none">
+        <ul>
+            <li onclick="enviando(1)"><a>Hacer Critico</a></li>
+            <li onclick="enviando(0)"><a>Quitar de Critico</a></li>
+            <li><a>Archivar</a></li>
+            <li><a>Bloquear</a></li>
+            <li><a>Eliminar</a></li>
+        </ul>
     </div>
 </div>

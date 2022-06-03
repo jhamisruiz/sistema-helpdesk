@@ -41,6 +41,7 @@
                         </div>
                     </form>
                 </div>
+                <p id="contextMenu"></p>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>

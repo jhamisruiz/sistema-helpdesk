@@ -266,6 +266,7 @@
                                     <!-- /.tab-content -->
                                 </div><!-- /.card-body -->
                             </div>
+                            <p id="contextMenu"></p>
                             <!-- /.card -->
                         </div>
                         <!-- /.col -->
