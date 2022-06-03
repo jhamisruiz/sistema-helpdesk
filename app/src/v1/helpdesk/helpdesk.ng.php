@@ -31,15 +31,14 @@ $request = json_decode(file_get_contents('php://input'), true);
 ---LISTAR DATOS DE LA chats
 =============================================*/
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    //echo json_encode($_GET);
     // UNIDADES DE MEDIDA
-    if (isset($_GET["lschat"]) && $_GET["lschat"] == true) {
+    if (isset($_GET["length"]) && $_GET["length"] == "lsChat") {
         $gchat = new helpdeskChat();
-        $gchat->chat = $_GET["lschat"];
+        $gchat->chat = true;
         $gchat->nghelpdeskChat();
     }
     // UNIDADES DE MEDIDA
-    if (isset($_GET["chat"]) && $_GET["chat"]  == "lsf2dChat") {
+    if (isset($_GET["length"]) && $_GET["length"] == "lsf2dChat") {
         $gchat = new helpdeskChat();
         $gchat->f2fchat = $_GET["start"];
         $gchat->ngf2fChat();
