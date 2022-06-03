@@ -69,8 +69,10 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
         try {
             var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
             var blob = item.getAsFile();
-            $scope.images.push(blob);
+            var images = $scope.images;
+            images.push(blob);
             $scope.generaImages();
+            console.log(images)
         } catch (error) {
             //error
         }
