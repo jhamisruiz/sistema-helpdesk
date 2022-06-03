@@ -32,9 +32,9 @@ $request = json_decode(file_get_contents('php://input'), true);
 =============================================*/
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // UNIDADES DE MEDIDA
-    if (isset($_GET["length"]) && $_GET["length"] == "lsf2dChatt") {
+    if (isset($_GET["length"]) && $_GET["length"] == "clientes") {
         $gchat = new helpdeskChat();
-        $gchat->chat = true;
+        $gchat->chat = $_GET["length"];
         $gchat->nghelpdeskChat();
     }
     // UNIDADES DE MEDIDA
