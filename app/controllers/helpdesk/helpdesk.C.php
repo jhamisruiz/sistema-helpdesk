@@ -3,26 +3,28 @@ class helpdeskController
 {
     static public function LISTCHAT($data)
     {
-        ini_set('date.timezone', 'America/Lima');
-        $fecha = date('Y-m-d H:i:s', time());
-        $sql = "SELECT 
+        if ($data) {
+            ini_set('date.timezone', 'America/Lima');
+            $fecha = date('Y-m-d H:i:s', time());
+            $sql = "SELECT 
             H.id,H.id_cliente,  (select S.mensaje FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as mensaje,
             (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as fecha_registro,
             C.names,C.last_name, C.razon_social,C.phone,C.email
             FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id
             GROUP BY H.id_cliente
-        ";
-        $chat = ModelQueryes::SQL($sql);
+            ";
+            $chat = ModelQueryes::SQL($sql);
 
-        for ($i = 0; $i < count($chat); $i++) {
-            $date1 = new DateTime($chat[$i]['fecha_registro']);
-            $date2 = new DateTime("now");
-            $diff = $date1->diff($date2);
+            for ($i = 0; $i < count($chat); $i++) {
+                $date1 = new DateTime($chat[$i]['fecha_registro']);
+                $date2 = new DateTime("now");
+                $diff = $date1->diff($date2);
 
-            $chat[$i]['fecha_registro'] = get_format($diff);
-            # code...
+                $chat[$i]['fecha_registro'] = get_format($diff);
+                # code...
+            }
+            return $chat;
         }
-        return $chat;
     }
     static public function LISTF2FCHAT($id)
     {
@@ -41,8 +43,8 @@ class helpdeskController
             $date2 = new DateTime("now");
             $diff = $date1->diff($date2);
             //$id= $chat[$i]['id'];
-            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes"=>""], ["id_chat=" => $chat[$i]['id']]);
-            $chat[$i]['imagenes']= $images;
+            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes" => ""], ["id_chat=" => $chat[$i]['id']]);
+            $chat[$i]['imagenes'] = $images;
             $chat[$i]['img_length'] = count($images);
 
             $chat[$i]['fecha_registro'] = get_format($diff);
