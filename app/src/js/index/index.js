@@ -100,7 +100,6 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
             data: formt,
             headers: { 'Content-Type': undefined }
         }).then(function success(response) {
-            console.log(response)
             alertify.success("OK: solicitud enviada, revisa tu email:" + response.data+"");//alerta de guardado
             $scope.index = JSON.parse(JSON.stringify($scope.Index));
             $scope.respuesta = "Te enviaremos una respuesta a tu email: " + response.data + "."
