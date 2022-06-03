@@ -3,28 +3,26 @@ class helpdeskController
 {
     static public function LISTCHAT($data)
     {
-        if ($data) {
-            ini_set('date.timezone', 'America/Lima');
-            $fecha = date('Y-m-d H:i:s', time());
-            $sql = "SELECT 
+        ini_set('date.timezone', 'America/Lima');
+        $fecha = date('Y-m-d H:i:s', time());
+        $sql = "SELECT 
             H.id,H.id_cliente,  (select S.mensaje FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as mensaje,
             (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as fecha_registro,
             C.names,C.last_name, C.razon_social,C.phone,C.email
-            FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id
+            FROM chat H INNER JOIN $data C ON H.id_cliente=C.id
             GROUP BY H.id_cliente
             ";
-            $chat = ModelQueryes::SQL($sql);
+        $chat = ModelQueryes::SQL($sql);
 
-            for ($i = 0; $i < count($chat); $i++) {
-                $date1 = new DateTime($chat[$i]['fecha_registro']);
-                $date2 = new DateTime("now");
-                $diff = $date1->diff($date2);
+        for ($i = 0; $i < count($chat); $i++) {
+            $date1 = new DateTime($chat[$i]['fecha_registro']);
+            $date2 = new DateTime("now");
+            $diff = $date1->diff($date2);
 
-                $chat[$i]['fecha_registro'] = get_format($diff);
-                # code...
-            }
-            return $chat;
+            $chat[$i]['fecha_registro'] = get_format($diff);
+            # code...
         }
+        return $chat;
     }
     static public function LISTF2FCHAT($id)
     {
@@ -61,15 +59,15 @@ function get_format($df)
     $str .= ($df->invert == 1) ? ' - ' : '';
     if ($df->y > 0) {
         // years
-        $str .= ($df->y > 1) ? $df->y . ' Years ' : $df->y . ' Year ';
+        $str .= ($df->y > 1) ? $df->y . ' Y' : $df->y . ' Y ';
     }
     if ($df->m > 0) {
         // month
-        $str .= ($df->m > 1) ? $df->m . ' Months ' : $df->m . ' Month ';
+        $str .= ($df->m > 1) ? $df->m . ' M' : $df->m . ' M';
     }
     if ($df->d > 0) {
         // days
-        $str .= ($df->d > 1) ? $df->d . ' Days ' : $df->d . ' Day ';
+        $str .= ($df->d > 1) ? $df->d . ' D' : $df->d . ' D ';
     }
     if ($df->h > 0) {
         // hours
