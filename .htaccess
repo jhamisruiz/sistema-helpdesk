@@ -38,9 +38,10 @@ RewriteRule ^v1/index/([0-9]+)/?$ app/src/v1/index/index.ng.php?start=$1&length=
 RewriteRule ^v1/index/?$ app/src/v1/index/index.ng.php? [L,QSA]
 #####  HELPDESK
 ###get list
-RewriteRule ^v1/helpdesk-chat/([0-9]+)/?$ app/src/v1/helpdesk/helpdesk.ng.php?start=$1&length=$2$search=$3 [L,QSA]
+RewriteRule ^v1/helpdeskchat/([0-9]+)/?$ app/src/v1/helpdesk/helpdesk.ng.php?start=$1&length=$2$search=$3 [L,QSA]
 ###post
-RewriteRule ^v1/helpdesk-chat/?$ app/src/v1/helpdesk/helpdesk.ng.php? [L,QSA]
+RewriteRule ^v1/helpdeskchat/?$ app/src/v1/helpdesk/helpdesk.ng.php? [L,QSA]
+
 RewriteRule ^v1/developer/?$ app/controllers/pedidos/categorias.C.php?
 ######************************************
 ######************************************
