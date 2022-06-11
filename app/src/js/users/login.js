@@ -53,3 +53,34 @@ try {
 } catch (error) {
     
 }
+
+
+var sign = angular.module('app-SignUp', []);
+
+sign.controller('ctrSign', function ($scope, $http, $window){
+    $scope.Crear = { names: null, fecha_registro: null, last_name: null, phone: null, rep_password: null, password: null, user_name: null, email: null };
+    $scope.confirm='';
+    $scope.guardarUser= function(){
+        var form = $scope.crear, p = new Date();
+        console.log(form)
+        form['names'] ='';
+        form['last_name'] = '';
+        form['fecha_registro'] = p.toDateString();
+
+        var formt = new FormData();
+        formt.append('usuarios', JSON.stringify(form));
+        formt.append('formulario', 'USERS');
+        $http({
+            method: 'POST',
+            url: window.location.origin + '/v1/usuarios',
+            data: formt,
+            headers: { 'Content-Type': undefined }
+        }).then(function success(response) {
+            $scope.confirm =response.data;
+            alertify.success(response.data);
+            window.location.assign('/login');
+        },
+            function error(response) { alertify.error('Error: al iniciar'); }
+        );
+    }
+});

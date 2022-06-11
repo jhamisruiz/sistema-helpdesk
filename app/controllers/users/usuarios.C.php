@@ -12,13 +12,12 @@ class ControllerUsuariosList
 
     static public function GUARDAR($datos)
     {
-
         ini_set('date.timezone', 'America/Lima');
         $fecha = date('Y-m-d H:i:s', time());
         $data = json_decode($datos, true);
         if (
-            $data["names"] &&
-            $data["last_name"] &&
+            $data["phone"] &&
+            $data["email"] &&
             $data["user_name"] &&
             $data["password"] &&
             $data["rep_password"]
