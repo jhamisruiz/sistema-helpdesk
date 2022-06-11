@@ -206,7 +206,7 @@ class ModelQueryes
 
                     return "OK";
                 } else {
-                    return "error";
+                    return "INSERT INTO $table $colums VALUES $values";
                 }
             }
         } catch (\Throwable $th) {
@@ -217,7 +217,7 @@ class ModelQueryes
             if ($dup[7] == "'dni'") {
                 return $sms;
             } else {
-                return 'error';
+                return "INSERT INTO $table $colums VALUES $values" . " ERRO => " . $sms;
             }
         }
 
