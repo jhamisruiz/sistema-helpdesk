@@ -7,7 +7,7 @@ class indexController
     {
         ini_set('date.timezone', 'America/Lima');
         $fecha = date('Y-m-d H:i:s', time());
-        
+
         $data = json_decode($res['index'], true);
         $length = json_decode($res['img_length'], true); // array.length
         $email = ModelQueryes::SELECT(["id" => "", "email" => ""], ["clientes" => "",], ["email='" => $data['email'] . "'"]);
@@ -27,9 +27,10 @@ class indexController
                 "razon_social" => $data['razon_social'],
                 "email" => $data['email'],
                 "phone" => $data['numero'],
+                "date_create" => $fecha,
                 "LASTID" => "YES"
             ];
-            $insert = ControllerQueryes::INSERT($insert);
+            $insert = ModelQueryes::INSERT($insert);
             $id = $insert;
         }
         ///crea chat
