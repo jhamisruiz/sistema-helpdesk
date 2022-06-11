@@ -14,7 +14,7 @@ DB_DATABASE=db_sistema_helpdesk
 DB_USERNAME=jhamis
 DB_PASSWORD=2yBChJIiXU26DYiQ
 
---------local-----------
+--------local fix git ignore-----------
 
 APP_ENV=local
 APP_KEY=base64:mW7dQ+X7Y/I3033xVcz8MIEMtc/FKk/Sxa6R2wNw5TM=
