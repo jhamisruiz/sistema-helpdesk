@@ -36,7 +36,7 @@ class ajaxUsuarios
         } else {
             header("HTTP/1.1 500 ERROR-MSQL");
         }
-        echo json_encode($response);
+        echo json_encode($response. ':Usuario guardado');
     }
     /*=============================================
         POST PERMISOS
