@@ -5,51 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-1">
-                        <nav class="menu p-2">
-                            <img width="54px" height="54px" class="rounded-circle" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80">
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item">
-                                    <i class="fa fa-home" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item item-active">
-                                    <i class="fa fa-commenting" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item">
-                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav class="menu  ">
-                            <ul class="items">
-                                <li class="item">
-                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                </li>
-                            </ul>
-                        </nav>
+                        <?php include_once('menu.php') ?>
                     </div>
                     <div class="col-lg-5">
                         <section class="discussions">
