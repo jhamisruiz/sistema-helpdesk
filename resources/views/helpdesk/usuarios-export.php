@@ -8,7 +8,7 @@
                         <?php include_once('menu.php') ?>
                     </div>
                     <div class="col-lg-11">
-                        <div class="card-body border w-100">
+                        <div class="card-body border border-primary w-100">
                             <div class="row">
                                 <div class="col-lg-3 mb-2 pb-0">
                                     <div class="mb-0  p-0 d-flex align-items-center">
