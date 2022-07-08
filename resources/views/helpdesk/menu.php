@@ -8,13 +8,15 @@
         </li>
     </ul>
 </nav>
-<nav class="menu  ">
-    <ul class="items">
-        <li class="item">
-            <i class="fa fa-user" aria-hidden="true"></i>
-        </li>
-    </ul>
-</nav>
+<a href="usuarios-usuarios">
+    <nav class="menu  ">
+        <ul class="items">
+            <li class="item item-active">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </li>
+        </ul>
+    </nav>
+</a>
 <nav class="menu  ">
     <ul class="items">
         <li class="item">

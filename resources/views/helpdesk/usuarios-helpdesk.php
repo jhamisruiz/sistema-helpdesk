@@ -22,7 +22,7 @@
                                 </div>
                             </div>
 
-                            <div class="discussion " ng-repeat="lc in listPrioridad" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible">
+                            <div class="discussion " ng-repeat="lc in listPrioridad" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="lc.prioridad">
                                 <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
                                     <div class="online" id="{{lc.id_cliente}}"></div>
                                 </div>
@@ -40,7 +40,7 @@
                                     <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <div class="discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible">
+                            <div class="discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="!lc.prioridad">
                                 <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
                                     <div class="online" id="{{lc.id_cliente}}"></div>
                                 </div>
@@ -82,13 +82,6 @@
                                     </div>
                                     <p class="time"> {{lf.fecha_registro}}</p>
                                 </div>
-                                <!-- respuesta -->
-                                <!-- <div class="message text-only">
-                                    <div class="response">
-                                        <p class="text"> Hey Megan ! It's been a while 😃</p>
-                                    </div>
-                                </div> -->
-
                                 <div class="message text-only" ng-if="form.send">
                                     <div class="response">
                                         <p class="text"> {{form.send}}</p>
@@ -113,6 +106,18 @@
             <li onclick="enviando(1)"><a>Hacer Critico</a></li>
             <li onclick="enviando(0)"><a>Quitar de Critico</a></li>
             <li><a>Archivar</a></li>
+            <li>
+                <div class="dropdown">
+                    <button class="btn btn-ligth dropdown-toggle w-100 p-0 m-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Derivar a:
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                    </ul>
+                </div>
+            </li>
             <li><a>Bloquear</a></li>
             <li><a>Eliminar</a></li>
         </ul>
