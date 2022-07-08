@@ -68,7 +68,12 @@
             $_GET["ruta"] == "usuarios-export"
         ) {
             if ($es_helpdesk) {
-                include "resources/views/helpdesk/" . $_GET["ruta"] . ".php";
+                if($_GET["ruta"] == "usuarios-usuarios"){
+                    $ruta = explode('-', $_GET["ruta"]);
+                    include "resources/views/users/" . $ruta[1] . ".php";
+                }else{
+                    include "resources/views/helpdesk/" . $_GET["ruta"] . ".php";
+                }
             } else {
                 include "resources/error/404.php";
             }

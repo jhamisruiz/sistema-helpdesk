@@ -1,6 +1,6 @@
 
 var app = angular.module('clientes-app', ['angularMoment', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
-app.service('httpCtrl', function ($http){
+app.service('httpCtrl', function ($http) {
     /// select ubigeo
     this.selectubigeo = function (name, ubigeo) {
         return $http({
@@ -46,12 +46,12 @@ app.controller('listCtrClientes', function ($scope, $timeout, $http) {
         selectClientesList($scope.length, $scope.search);
     };
     //modal edit by id
-    $scope.openModalCliente = function (index,id) {
+    $scope.openModalCliente = function (index, id) {
         selectClientesList($scope.length, '');
         var data = $scope.clientesLists[index];
         $scope.$broadcast("preEditCliente", data);// envia y activa 'spinner-border'
     }
-    
+
 
     $scope.openreset = function (id) {
         $scope.$broadcast("openreset", id); ///jala de controller child
@@ -128,7 +128,7 @@ app.controller('postClientes', function ($scope, $timeout, $http, httpCtrl) {
     $scope.button_edit = false;
     $scope.button_post = true;
     $scope.formLoad = false;
-    $scope.onEdit=false;
+    $scope.onEdit = false;
 
     //init ubigeo Departamento
     httpCtrl.selectubigeo('departamento', '0000').then(function (data) {
@@ -168,15 +168,15 @@ app.controller('postClientes', function ($scope, $timeout, $http, httpCtrl) {
             Swal.fire({
                 position: 'middle',
                 icon: 'success',
-                text: response.data+': Cliente guardado',
+                text: response.data + ': Cliente guardado',
                 showConfirmButton: true,
-            }) 
+            })
         },
             function error(response) { Swal.close(); alertify.error('Error: Datos no guardados'); }
         );
     };
     //edit by id
-    $scope.$on('preEditCliente', function (event, data){
+    $scope.$on('preEditCliente', function (event, data) {
         $scope.reset();
         $scope.onEdit = true;
         $scope.button_edit = true;
@@ -184,7 +184,7 @@ app.controller('postClientes', function ($scope, $timeout, $http, httpCtrl) {
         let ubg = data['id_ubigeo']
         data['idDepartamento'] = ubg.substr(0, 2) + '0000';
         data['idProvincia'] = ubg.substr(0, 4) + '00';
-        $scope.cliente=data;
+        $scope.cliente = data;
     })
 
     $scope.saveEditUsuarios = function () {

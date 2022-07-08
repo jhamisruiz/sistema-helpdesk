@@ -9,9 +9,8 @@ class helpdeskController
         $sql = "SELECT 
             H.id,H.id_cliente,  (select S.mensaje FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as mensaje,
             (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as fecha_registro,
-            C.names,C.last_name, C.razon_social,C.phone,C.email
+            C.names,C.last_name, C.razon_social,C.phone,C.email,H.prioridad
             FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id
-            WHERE H.prioridad=$data
             GROUP BY H.id_cliente
         ";
         $chat = ModelQueryes::SQL($sql);

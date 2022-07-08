@@ -1,10 +1,19 @@
 var index = angular.module('app-Index', ['ngAnimate', 'ngSanitize', 'ui.bootstrap',]);
-index.controller('ctrIndex', function ($scope, $http, $window) {
+index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
     $scope.Index = {razon_social:'',email:'',numero:'',mensaje:''};
     $scope.index = { razon_social: '', email: '', numero: '', mensaje: '' };
     $scope.textarea=0;
+    $scope.chatValid = true;
+    $scope.idcient= 0;
+    $scope.listf2fChats =[];
+    $scope.userNames =''
     //////////////////cargar imagenes
     $scope.images = [];
+    angular.element(window.document.body).ready(function () {
+        //listaChat({email:'jhamsel.rec@gmail.com'});
+        f2fChat();
+    });
+
     $scope.uploadIndexImg = function (e) {
 
         for (let f = 0; f < e.target.files.length; f++) {
@@ -106,9 +115,30 @@ index.controller('ctrIndex', function ($scope, $http, $window) {
             $scope.images.length = 0;
             $scope.images = [];
             $scope.generaImages();
+            listaChat(form);
+            $scope.chatValid = false;
         },
             function error(response) { alertify.error("ERROR: no se envio la solicitud."); }
         );
+    }
+
+    var listaChat = function (dat) {
+        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=').then(function (result) {
+            var c = result.data;
+            function extraer(data) { return data.email === dat.email; }
+            let resp = c.find(extraer)
+            $scope.idcient = resp.id_cliente;
+        });
+    }
+    var f2fChat = function () {
+        if ($scope.idcient){
+            $http.get(window.location.origin + '/v1/helpdesk-chat/' + $scope.idcient + '?length=lsf2dChat&search=' + $scope.idcient).then(function (result) {
+                var c = result.data;
+                $scope.listf2fChats = c
+                $scope.userNames = c[0].razon_social + '-' + c[0].names + '' + c[0].last_name
+            });
+        }
+        $timeout(f2fChat, 700);
     }
 });
 
