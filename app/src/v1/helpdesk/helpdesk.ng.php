@@ -32,15 +32,60 @@ class helpdeskChat
         echo json_encode($response);
     }
 
+    public $respuesta;
+    public function ngRespuesta()
+    {
+        $data = $this->respuesta;
+        $res=json_decode($data['data'], true);
+
+        ini_set('date.timezone', 'America/Lima');
+        $fecha = date('Y-m-d H:i:s', time());
+
+        $insert = array(
+            "table" => "chat", #nombre de tabla
+            "id_cliente" => $res["id_cliente"],
+            "mensaje" => $res["message"],
+            "visto" => 0,
+            "estado" => 1,
+            "id_helpdesk" => $res["id_helpdesk"],
+            "fecha_registro" => $fecha ,
+            "prioridad" => $res["prioridad"],
+        );
+
+        $response = ControllerQueryes::INSERT($insert);
+        echo json_encode($res);
+    }
+    public $cliente;
+    public function ngRespuestaCliente()
+    {
+        $data = $this->cliente;
+        $res = json_decode($data['data'], true);
+
+        ini_set('date.timezone', 'America/Lima');
+        $fecha = date('Y-m-d H:i:s', time());
+
+        $insert = array(
+            "table" => "chat", #nombre de tabla
+            "id_cliente" => $res["id_cliente"],
+            "mensaje" => $res["message"],
+            "visto" => 0,
+            "estado" => 1,
+            "fecha_registro" => $fecha,
+            "prioridad" => $res["prioridad"],
+        );
+
+        $response = ControllerQueryes::INSERT($insert);
+        echo json_encode($res);
+    }
     public $critico;
     public function ngcriticos()
     {
         $data = $this->critico;
-        $res=json_decode($data['data'], true);
+        $res = json_decode($data['data'], true);
 
         $update = array(
             "table" => "chat", #nombre de tabla
-            "prioridad" => $res["prioridad"], 
+            "prioridad" => $res["prioridad"],
         );
         $where = array(
             "id_cliente" => $res["id"], #condifion columna y valor
@@ -56,7 +101,19 @@ class helpdeskChat
 $request = json_decode(file_get_contents('php://input'), true);
 //REGISTRAR
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //GUARDAR-ACTUALIZA UNIDADES DE MEDIDA
+    //G 
+    if ($_REQUEST['formulario'] == "POSTRESPUESTA") {
+        $rr = new helpdeskChat();
+        $rr->respuesta = $_REQUEST;
+        $rr->ngRespuesta();
+    }
+
+    if ($_REQUEST['formulario'] == "POSTCLIENTE") {
+        $rc = new helpdeskChat();
+        $rc->cliente = $_REQUEST;
+        $rc->ngRespuestaCliente();
+    }
+
     if ($_REQUEST['formulario'] == "POSTC") {
         $um = new helpdeskChat();
         $um->critico = $_REQUEST;

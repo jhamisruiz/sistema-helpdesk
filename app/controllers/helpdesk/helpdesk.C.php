@@ -31,7 +31,7 @@ class helpdeskController
         $fecha = date('Y-m-d H:i:s', time());
         $sql = "SELECT 
             H.id,H.id_cliente,  H.mensaje, H.fecha_registro, 
-            C.names,C.last_name, C.razon_social,C.phone,C.email
+            C.names,C.last_name, C.razon_social,C.phone,C.email,H.id_helpdesk,H.prioridad
             FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id 
             WHERE H.id_cliente=$id
         ";

@@ -1,4 +1,3 @@
-
 <div class="container border" ng-app="usuarios-app" ng-controller="listUsuariosC">
     <div>
         <!-- Main content -->
@@ -108,6 +107,20 @@
                 <li onclick="enviando(1)"><a>Hacer Critico</a></li>
                 <li onclick="enviando(0)"><a>Quitar de Critico</a></li>
                 <li><a>Archivar</a></li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-ligth dropdown-toggle w-100 p-0 m-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Derivar a:
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><button class="dropdown-item" type="button">Helpdesk</button></li>
+                            <li><button class="dropdown-item" type="button">Soporte</button></li>
+                            <li><button class="dropdown-item" type="button">Area contable</button></li>
+                            <li><button class="dropdown-item" type="button">Area Ventas</button></li>
+                            <li><button class="dropdown-item" type="button">Area Redes</button></li>
+                        </ul>
+                    </div>
+                </li>
                 <li><a>Bloquear</a></li>
                 <li><a>Eliminar</a></li>
             </ul>
