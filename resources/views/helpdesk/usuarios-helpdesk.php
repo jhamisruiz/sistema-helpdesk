@@ -61,39 +61,43 @@
                                 <p class="name">{{userNames}}</p>
                                 <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                             </div>
-                            <div class="messages-chat" style="height: 425px;overflow-y: scroll;">
-                                <div ng-repeat="lf in listf2fChat">
-                                    <div class="message">
-                                        <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
-                                            <div class="online"></div>
+                            <div id="messageschat" class="messages-chat mb-5" style="height: 500px;overflow-y: scroll;">
+                                <div ng-repeat="lf in listf2fChat" style="background-color: transparent;">
+                                    <div ng-if="!lf.id_helpdesk">
+                                        <div class="message">
+                                            <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
+                                                <div class="online"></div>
+                                            </div>
+                                            <p class="text text-light bg-secondary">{{lf.mensaje}} {{lf.id_helpdesk}}</p>
+
                                         </div>
-                                        <p class="text">{{lf.mensaje}} </p>
+                                        <div class="message text-only" ng-if="lf.imagenes.length">
+                                            <p class=""></p>
+                                            <div class="w-100 d-flex flex-wrap" ng-if="lf.img_length">
 
+                                                <div ng-repeat="img in lf.imagenes">
+                                                    <img ng-src="<?= URL_HOST_WEB ?>/{{img.url_img}}" width="500">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <p class="time text-info"> {{lf.fecha_registro}}</p>
                                     </div>
-                                    <div class="message text-only">
-                                        <p class=""></p>
-                                        <div class="w-100 d-flex flex-wrap" ng-if="lf.img_length">
-
-                                            <div ng-repeat="img in lf.imagenes">
-                                                <img ng-src="<?= URL_HOST_WEB ?>/{{img.url_img}}" width="500">
+                                    <div ng-if="lf.id_helpdesk" class="w-100 d-flex flex-column align-items-end">
+                                        <div class="message text-only d-flex justify-content-end">
+                                            <div class="response">
+                                                <p class="text text-light bg-success"> {{lf.mensaje}}</p>
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <p class="time"> {{lf.fecha_registro}}</p>
-                                </div>
-                                <div class="message text-only" ng-if="form.send">
-                                    <div class="response">
-                                        <p class="text"> {{form.send}}</p>
+                                        <p class="response-time time text-info" ng-if="lf.id_helpdesk"> {{lf.fecha_registro}}</p>
                                     </div>
                                 </div>
-                                <p class="response-time time" ng-if="form.send"> 15h04</p>
                             </div>
-                            <div class="footer-chat border border-primary">
+                            <div class="footer-chat border border-primary" onclick="scrollChatBottom()" onchange="scrollChatBottom()">
                                 <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
                                 <textarea ng-model="form.message" type="text" class="write-message w-100" placeholder="Type your message here"></textarea>
                                 <i class="material-icons" style="font-size:36px">attach_file</i>
-                                <i ng-click="sendmsm()" class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
+                                <i ng-click="sendmsm();scrollChatBottom()" class="icon send fa fa-paper-plane-o clickable" aria-hidden="true" onclick="scrollChatBottom()"></i>
                             </div>
                         </section>
                     </div>
@@ -112,9 +116,11 @@
                         Derivar a:
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button">Action</button></li>
-                        <li><button class="dropdown-item" type="button">Another action</button></li>
-                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        <li><button class="dropdown-item" type="button">Helpdesk</button></li>
+                        <li><button class="dropdown-item" type="button">Soporte</button></li>
+                        <li><button class="dropdown-item" type="button">Area contable</button></li>
+                        <li><button class="dropdown-item" type="button">Area Ventas</button></li>
+                        <li><button class="dropdown-item" type="button">Area Redes</button></li>
                     </ul>
                 </div>
             </li>

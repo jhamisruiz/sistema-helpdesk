@@ -1,16 +1,17 @@
 var index = angular.module('app-Index', ['ngAnimate', 'ngSanitize', 'ui.bootstrap',]);
 index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
-    $scope.Index = {razon_social:'',email:'',numero:'',mensaje:''};
+    $scope.Index = { razon_social: '', email: '', numero: '', mensaje: '' };
     $scope.index = { razon_social: '', email: '', numero: '', mensaje: '' };
-    $scope.textarea=0;
+    $scope.form = { "message": '', "id_cliente": null, "id_helpdesk": null, "prioridad": null, };
+    $scope.textarea = 0;
     $scope.chatValid = true;
-    $scope.idcient= 0;
-    $scope.listf2fChats =[];
-    $scope.userNames =''
+    $scope.idcient = 0;
+    $scope.listf2fChats = [];
+    $scope.userNames = ''
     //////////////////cargar imagenes
     $scope.images = [];
     angular.element(window.document.body).ready(function () {
-        //listaChat({email:'jhamsel.rec@gmail.com'});
+        //listaChat({ email: 'jhamsel.rec@gmail.com' });
         f2fChat();
     });
 
@@ -81,24 +82,22 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
             var images = $scope.images;
             images.push(blob);
             $scope.generaImages();
-            console.log(images)
         } catch (error) {
             //error
         }
 
     });
 
-    $scope.enviar = function (){
-        console.log($scope.index)
+    $scope.enviar = function () {
         var form = $scope.index;
         var images = $scope.images;
-        
+
         var formt = new FormData();
         ///guarda imagen una por una en el formdata
         for (let i = 0; i < images.length; i++) {
             formt.append(i, images[i]);
         }
-        
+
         formt.append('index', JSON.stringify(form));
         formt.append('img_length', images.length);
         formt.append('img_index', $scope.images);
@@ -109,7 +108,7 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
             data: formt,
             headers: { 'Content-Type': undefined }
         }).then(function success(response) {
-            alertify.success("OK: solicitud enviada, revisa tu email:" + response.data+"");//alerta de guardado
+            alertify.success("OK: solicitud enviada, revisa tu email:" + response.data + "");//alerta de guardado
             $scope.index = JSON.parse(JSON.stringify($scope.Index));
             $scope.respuesta = "Te enviaremos una respuesta a tu email: " + response.data + "."
             $scope.images.length = 0;
@@ -131,14 +130,47 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
         });
     }
     var f2fChat = function () {
-        if ($scope.idcient){
+        if ($scope.idcient) {
             $http.get(window.location.origin + '/v1/helpdesk-chat/' + $scope.idcient + '?length=lsf2dChat&search=' + $scope.idcient).then(function (result) {
                 var c = result.data;
                 $scope.listf2fChats = c
                 $scope.userNames = c[0].razon_social + '-' + c[0].names + '' + c[0].last_name
+                $scope.scrollChatBottom();
             });
         }
-        $timeout(f2fChat, 700);
+        $timeout(f2fChat, 500);
+    }
+    $scope.scrollChatBottom = function () {
+        let identi = 0;
+        if (identi == 3) {
+            identi = 0;
+        } else {
+            $identi = identi + 1;
+            var objDiv = document.getElementById("messageschat");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }
+
+    }
+    $scope.sendmsm = function () {
+        let form = $scope.form;
+        let chtclient = $scope.listf2fChats;
+        if (form.message) {
+            form.id_cliente = chtclient[0].id_cliente
+            form.prioridad = chtclient[0].prioridad
+            var formt = new FormData();
+            formt.append('data', JSON.stringify(form));
+            formt.append('formulario', 'POSTCLIENTE');
+            $http({
+                method: 'POST',
+                url: window.location.origin + '/v1/helpdesk-chat',
+                data: formt,
+                headers: { 'Content-Type': undefined }
+            }).then(function success(response) {
+                $scope.scrollChatBottom();
+                $scope.form.message = '';
+            }
+            );
+        }
     }
 });
 
@@ -148,3 +180,8 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
 //     console.log(blob)
 
 // });
+
+function scrollChatBottom() {
+    var objDiv = document.getElementById("messageschat");
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
