@@ -41,17 +41,18 @@
                                     <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <div class="discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="!lc.prioridad">
-                                <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
-                                    <div class="online" id="{{lc.id_cliente}}"></div>
+                            <div style="height: 400px;overflow-y: scroll;">
+                                <div class="discussion " ng-repeat="lc in listChats" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="!lc.prioridad">
+                                    <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
+                                        <div class="online" id="{{lc.id_cliente}}"></div>
+                                    </div>
+                                    <div class="desc-contact" id="{{lc.id_cliente}}">
+                                        <p class="name" id="{{lc.id_cliente}}">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
+                                        <p class="message" id="{{lc.id_cliente}}">{{lc.mensaje }}</p>
+                                    </div>
+                                    <div class="timer" id="{{lc.id_cliente}}">{{lc.fecha_registro }}</div>
                                 </div>
-                                <div class="desc-contact" id="{{lc.id_cliente}}">
-                                    <p class="name" id="{{lc.id_cliente}}">{{lc.razon_social }} - {{lc.names }} {{lc.last_name}}</p>
-                                    <p class="message" id="{{lc.id_cliente}}">{{lc.mensaje }}</p>
-                                </div>
-                                <div class="timer" id="{{lc.id_cliente}}">{{lc.fecha_registro }}</div>
                             </div>
-
                         </section>
                     </div>
                     <!-- SECCION DE CHAT F2F -->
