@@ -2,7 +2,7 @@ var index = angular.module('app-Index', ['ngAnimate', 'ngSanitize', 'ui.bootstra
 index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
     $scope.Index = { razon_social: '', email: '', numero: '', mensaje: '' };
     $scope.index = { razon_social: '', email: '', numero: '', mensaje: '' };
-    $scope.form = { "message": '', "id_cliente": null, "id_helpdesk": null, "prioridad": null, };
+    $scope.form = { "message": '', "id_cliente": null, "id_helpdesk": 0, "prioridad": null, };
     $scope.textarea = 0;
     $scope.chatValid = true;
     $scope.idcient = 0;
@@ -11,7 +11,7 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
     //////////////////cargar imagenes
     $scope.images = [];
     angular.element(window.document.body).ready(function () {
-        //listaChat({ email: 'jhamsel.rec@gmail.com' });
+        listaChat({ email: 'jhamsel.rec@gmail.com' });
         f2fChat();
     });
 
@@ -116,13 +116,19 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
             $scope.generaImages();
             listaChat(form);
             $scope.chatValid = false;
+
+            $timeout(respondelbot, 1000);
         },
             function error(response) { alertify.error("ERROR: no se envio la solicitud."); }
         );
     }
+    var respondelbot = function () {
+        $scope.respondeelbot();
+    }
+
 
     var listaChat = function (dat) {
-        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=').then(function (result) {
+        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=0').then(function (result) {
             var c = result.data;
             function extraer(data) { return data.email === dat.email; }
             let resp = c.find(extraer)
@@ -135,21 +141,23 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
                 var c = result.data;
                 $scope.listf2fChats = c
                 $scope.userNames = c[0].razon_social + '-' + c[0].names + '' + c[0].last_name
-                $scope.scrollChatBottom();
+                $scope.scrollChatBottom($scope.identi);
             });
         }
         $timeout(f2fChat, 500);
     }
-    $scope.scrollChatBottom = function () {
-        let identi = 0;
-        if (identi == 3) {
-            identi = 0;
+    $scope.identi = 0;
+    $scope.funcin = function (i) {
+        $scope.identi = 0; 
+    }
+    $scope.scrollChatBottom = function (c) {
+        if ($scope.identi > 20) {
+            $scope.identi = c;
         } else {
-            $identi = identi + 1;
+            $scope.identi = $scope.identi + 1;
             var objDiv = document.getElementById("messageschat");
             objDiv.scrollTop = objDiv.scrollHeight;
         }
-
     }
     $scope.sendmsm = function () {
         let form = $scope.form;
@@ -166,7 +174,33 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
                 data: formt,
                 headers: { 'Content-Type': undefined }
             }).then(function success(response) {
-                $scope.scrollChatBottom();
+                $scope.scrollChatBottom(0);
+                $scope.form.message = '';
+            }
+            );
+        }
+    }
+
+    ///responde el chatbot
+    $scope.respondeelbot = function () {
+        let form = $scope.form;
+        form['message'] = 'Hola gracias por contactarnos, ahora uno de nuestros agentes te atenderá.'
+        var data = JSON.parse(sessionStorage.getItem('user'));
+        let chtclient = $scope.listf2fChats;
+        if (form.message) {
+            form.id_cliente = chtclient[0].id_cliente
+            form.prioridad = chtclient[0].prioridad
+            form['id_helpdesk'] = 10000
+            var formt = new FormData();
+            formt.append('data', JSON.stringify(form));
+            formt.append('formulario', 'POSTRESPUESTA');
+            $http({
+                method: 'POST',
+                url: window.location.origin + '/v1/helpdesk-chat',
+                data: formt,
+                headers: { 'Content-Type': undefined }
+            }).then(function success(response) {
+                $scope.scrollChatBottom(0);
                 $scope.form.message = '';
             }
             );
@@ -182,6 +216,10 @@ index.controller('ctrIndex', function ($scope, $http, $window, $timeout) {
 // });
 
 function scrollChatBottom() {
+    angular
+        .element(document.querySelector('[ng-controller="ctrIndex"]'))
+        .scope()
+        .funcin(0); //actualizar precio
     var objDiv = document.getElementById("messageschat");
     objDiv.scrollTop = objDiv.scrollHeight;
 }

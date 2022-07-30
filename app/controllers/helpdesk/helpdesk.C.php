@@ -1,18 +1,21 @@
 <?php
 class helpdeskController
 {
-    static public function LISTCHAT($data)
+    static public function LISTCHAT(int $id)
     {
         ini_set('date.timezone', 'America/Lima');
         $fecha = date('Y-m-d H:i:s', time());
-
-        $sql = "SELECT 
+        $where = ($id) ? 'WHERE U.id = ' . $id :  '';
+        $sql = "SELECT
             H.id,H.id_cliente,  (select S.mensaje FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as mensaje,
-            (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente) ) as fecha_registro,
-            C.names,C.last_name, C.razon_social,C.phone,C.email,H.prioridad
+            (select S.fecha_registro FROM chat S WHERE S.id=(select max(id) as id from chat where id_cliente= H.id_cliente)  ) as fecha_registro,
+            C.names,C.last_name, C.razon_social,C.phone,C.email,H.prioridad,H.id_area, U.id_area as user_area
             FROM chat H INNER JOIN clientes C ON H.id_cliente=C.id
+            INNER JOIN usuarios U ON U.id_area =H.id_area
+            $where
             GROUP BY H.id_cliente
         ";
+        //echo $sql;
         $chat = ModelQueryes::SQL($sql);
 
         for ($i = 0; $i < count($chat); $i++) {
@@ -42,8 +45,8 @@ class helpdeskController
             $date2 = new DateTime("now");
             $diff = $date1->diff($date2);
             //$id= $chat[$i]['id'];
-            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes"=>""], ["id_chat=" => $chat[$i]['id']]);
-            $chat[$i]['imagenes']= $images;
+            $images = ControllerQueryes::SELECT(["*" => "*"], ["imagenes" => ""], ["id_chat=" => $chat[$i]['id']]);
+            $chat[$i]['imagenes'] = $images;
             $chat[$i]['img_length'] = count($images);
 
             $chat[$i]['fecha_registro'] = get_format($diff);
