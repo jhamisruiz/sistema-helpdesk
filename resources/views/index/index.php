@@ -12,7 +12,7 @@
                                     <p class="name">{{userNames}}</p>
                                     <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                                 </div>
-                                <div id="messageschat" class="messages-chat mb-5" style="height: 500px;overflow-y: scroll;">
+                                <div id="messageschat" class="messages-chat mb-5" style="height: 400px;overflow-y: scroll;">
                                     <div ng-repeat="lf in listf2fChats">
                                         <div ng-if="!lf.id_helpdesk">
                                             <div class="message text-only">
