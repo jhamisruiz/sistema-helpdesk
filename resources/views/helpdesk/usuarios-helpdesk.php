@@ -55,7 +55,7 @@
                         </section>
                     </div>
                     <!-- SECCION DE CHAT F2F -->
-                    <div class="col-lg-6 border border-primary p-0" style="height: 580px">
+                    <div class="col-lg-6 border border-primary p-0" style="height: 610px; padding-bottom: 50px;">
                         <section class="chat ">
                             <div class="header-chat">
                                 <i class="icon fa fa-user-o" aria-hidden="true"></i>
