@@ -36,7 +36,7 @@
                                             </div>
                                             <p class="time d-flex justify-content-end text-info"> {{lf.fecha_registro}}</p>
                                         </div>
-                                        <div ng-if="lf.id_helpdesk">
+                                        <div ng-if="lf.id_helpdesk !==null">
                                             <div class="message text-only">
                                                 <div>
                                                     <p class="text text-light bg-secondary"> {{lf.mensaje}}</p>
@@ -88,7 +88,7 @@
                                 <div class="form-group" id="img_preview"></div>
                                 <samp class="fs-4 text-info">{{respuesta}}</samp>
                                 <div class="form-group mt-4 mb-4">
-                                    <button ng-click="enviar()" onclick="scrollChatBottom()" type="button" class="btn btn-primary w-25" ng-disabled="!indexForm.$valid">Enviar</button>
+                                    <button ng-click="enviar();scrollChatBottom(0);" onclick="scrollChatBottom()" type="button" class="btn btn-primary w-25" ng-disabled="!indexForm.$valid">Enviar</button>
                                 </div>
                             </div>
                         </div>

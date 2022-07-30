@@ -14,7 +14,7 @@ class ModelUsuariosList
                         u.last_name LIKE '%$search%' OR
                         u.email  LIKE '%$search%' OR
                         user_name LIKE '%$search%' 
-                    ORDER BY u.id asc
+                    ORDER BY u.id DESC
                     LIMIT :num
                 ");
             $stmt->bindParam("num", $length, PDO::PARAM_INT);

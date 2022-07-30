@@ -81,6 +81,19 @@ class ControllerUsuariosList
     {
         $permisos = $data['permisos'];
 
+        $val = (count($permisos) > 0) ? 1 : 0;
+
+        $area = ($val) ? 0 : null;
+        $update = array(
+            "table" => "usuarios", #nombre de tabla
+            "es_helpdesk" => $val, #nombre de columna y valor
+            "id_area"=> $permisos[0] ,#nombre de columna y valor
+        );
+        $where = array(
+            "id" => $data["id"], #condifion columna y valor
+        );
+        $respon = ControllerQueryes::UPDATE($update, $where);
+
         $values = '';
         for ($i = 0; $i < count($permisos); $i++) {
             $coma = ',';

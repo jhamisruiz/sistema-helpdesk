@@ -48,7 +48,7 @@
                                                 <th class="text-white bg-primary w-25">Fecha R</th>
                                                 <th class="text-white bg-primary">Estado</th>
                                                 <th class="text-white bg-primary">Passowrd</th>
-                                                <th class="text-white bg-primary">Permisos</th>
+                                                <th class="text-white bg-primary">Areas</th>
                                                 <th class="bg-primary text-white" style="max-width: 70px;">Action</th>
                                             </tr>
                                         </thead>
@@ -68,7 +68,7 @@
                                                     <button ng-click="openreset(usuario.id)" class="btn bg-warning text-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset Password</button>
                                                 </td>
                                                 <td>
-                                                    <button ng-click="usuarioPermisos(usuario.id)" class="btn bg-info text-white btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalPerms">Roles</button>
+                                                    <button ng-click="usuarioPermisos(usuario.id)" class="btn bg-info text-white btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalPerms">Area</button>
                                                 </td>
                                                 <td class="d-flex justify-content-between">
                                                     <div class="dropdown dropdown-action">
@@ -113,11 +113,11 @@
                             Derivar a:
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><button class="dropdown-item" type="button">Helpdesk</button></li>
+                            <li><button class="dropdown-item" type="button">Administracion</button></li>
                             <li><button class="dropdown-item" type="button">Soporte</button></li>
-                            <li><button class="dropdown-item" type="button">Area contable</button></li>
-                            <li><button class="dropdown-item" type="button">Area Ventas</button></li>
-                            <li><button class="dropdown-item" type="button">Area Redes</button></li>
+                            <li><button class="dropdown-item" type="button">Recursos Humanos</button></li>
+                            <li><button class="dropdown-item" type="button">Contabilidad</button></li>
+                            <li><button class="dropdown-item" type="button">Servicio al cliente</button></li>
                         </ul>
                     </div>
                 </li>
@@ -244,16 +244,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <label><input type="checkbox" name="permisos[]" id="cbox1" value="1" ng-checked="1==permisos[0].id_permiso"> Helpdesk</label>
+                        <label><input class="form-check-input mr-5" type="radio" name="permisos[]" id="cbox1" value="1" ng-checked="1==permisos[0].id_permiso"> Administracion</label>
                     </div>
                     <div class="col-lg-12">
-                        <label><input type="checkbox" name="permisos[]" id="cbox2" value="2" ng-checked="2==permisos[1].id_permiso"> Administracion</label>
+                        <label><input class="form-check-input mr-5" type="radio" name="permisos[]" id="cbox2" value="2" ng-checked="2==permisos[1].id_permiso"> Soporte</label>
                     </div>
                     <div class="col-lg-12">
-                        <label><input type="checkbox" name="permisos[]" id="cbox3" value="3" ng-checked="3==permisos[2].id_permiso"> Ventas</label>
+                        <label><input class="form-check-input mr-5" type="radio" name="permisos[]" id="cbox3" value="3" ng-checked="3==permisos[2].id_permiso"> Recursos Humanos</label>
                     </div>
                     <div class="col-lg-12">
-                        <label><input type="checkbox" name="permisos[]" id="cbox4" value="4" ng-checked="4==permisos[3].id_permiso"> Usuarios</label>
+                        <label><input class="form-check-input mr-5" type="radio" name="permisos[]" id="cbox4" value="4" ng-checked="4==permisos[3].id_permiso"> Contabilidad</label>
+                    </div>
+                    <div class="col-lg-12">
+                        <label><input class="form-check-input mr-5" type="radio" name="permisos[]" id="cbox4" value="5" ng-checked="5==permisos[4].id_permiso"> Servicio al cliente</label>
                     </div>
                 </div>
                 <div class="modal-footer">

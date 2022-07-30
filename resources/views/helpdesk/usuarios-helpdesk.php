@@ -22,7 +22,7 @@
                                 </div>
                             </div>
 
-                            <div class="discussion " ng-repeat="lc in listPrioridad" ng-click="f2fChat(lc.id_cliente)" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="lc.prioridad">
+                            <div class="discussion " ng-repeat="lc in listPrioridad" ng-click="f2fChat(lc.id_cliente)" onclick="hsscrollChatBottom()" id="{{lc.id_cliente}}" ng-contextmenu visible="isVisible" ng-if="lc.prioridad">
                                 <div class="photo border border-info" id="{{lc.id_cliente}}" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
                                     <div class="online" id="{{lc.id_cliente}}"></div>
                                 </div>
@@ -33,6 +33,7 @@
                                 <div class="timer" id="{{lc.id_cliente}}">{{lc.fecha_registro }}</div>
                             </div>
                         </section>
+                        <!-- //////////////////////////////// -->
                         <section class="discussions">
                             <div class="card m-0 rounded-0 border border-2">
                                 <div class="pl-4 pr-4 pt-4  d-flex justify-content-between">
@@ -63,7 +64,7 @@
                             </div>
                             <div id="messageschat" class="messages-chat mb-5" style="height: 500px;overflow-y: scroll;">
                                 <div ng-repeat="lf in listf2fChat" style="background-color: transparent;">
-                                    <div ng-if="!lf.id_helpdesk">
+                                    <div ng-if="lf.id_helpdesk ===null">
                                         <div class="message">
                                             <div class="photo border border-info" style="background-image: url(https://e7.pngegg.com/pngimages/146/551/png-clipart-user-login-mobile-phones-password-user-miscellaneous-blue-thumbnail.png);">
                                                 <div class="online"></div>
@@ -83,7 +84,7 @@
                                         </div>
                                         <p class="time text-info"> {{lf.fecha_registro}}</p>
                                     </div>
-                                    <div ng-if="lf.id_helpdesk" class="w-100 d-flex flex-column align-items-end">
+                                    <div ng-if="lf.id_helpdesk !==null" class="w-100 d-flex flex-column align-items-end">
                                         <div class="message text-only d-flex justify-content-end">
                                             <div class="response">
                                                 <p class="text text-light bg-success"> {{lf.mensaje}}</p>
@@ -93,11 +94,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="footer-chat border border-primary" onclick="scrollChatBottom()" onchange="scrollChatBottom()">
+                            <div class="footer-chat border border-primary" onclick="hsscrollChatBottom()" onchange="hsscrollChatBottom()">
                                 <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
                                 <textarea ng-model="form.message" type="text" class="write-message w-100" placeholder="Type your message here"></textarea>
                                 <i class="material-icons" style="font-size:36px">attach_file</i>
-                                <i ng-click="sendmsm();scrollChatBottom()" class="icon send fa fa-paper-plane-o clickable" aria-hidden="true" onclick="scrollChatBottom()"></i>
+                                <i ng-click="sendmsm();scrollChatBottom(0)" class="icon send fa fa-paper-plane-o clickable" aria-hidden="true" onclick="hsscrollChatBottom()"></i>
                             </div>
                         </section>
                     </div>
@@ -116,11 +117,11 @@
                         Derivar a:
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button">Helpdesk</button></li>
-                        <li><button class="dropdown-item" type="button">Soporte</button></li>
-                        <li><button class="dropdown-item" type="button">Area contable</button></li>
-                        <li><button class="dropdown-item" type="button">Area Ventas</button></li>
-                        <li><button class="dropdown-item" type="button">Area Redes</button></li>
+                        <li><button type="button" onclick="derivando(1)" class="dropdown-item" type="button">Administracion</button></li>
+                        <li><button type="button" onclick="derivando(2)" class="dropdown-item" type="button">Soporte</button></li>
+                        <li><button type="button" onclick="derivando(3)" class="dropdown-item" type="button">Recursos Humanos</button></li>
+                        <li><button type="button" onclick="derivando(4)" class="dropdown-item" type="button">Contabilidad</button></li>
+                        <li><button type="button" onclick="derivando(5)" class="dropdown-item" type="button">Servicio al cliente</button></li>
                     </ul>
                 </div>
             </li>

@@ -110,7 +110,7 @@ app.controller('listUsuariosC', function ($scope, $timeout, $http, httpCtrl) {
 
         var permiso = [], permisos = usuario['permisos'];
         var con = true;
-        for (let i = 1; i < 5; i++) {
+        for (let i = 1; i < 6; i++) {
             con = true;
             if (permisos[0]) {
                 for (let e = 0; e < permisos.length; e++) {

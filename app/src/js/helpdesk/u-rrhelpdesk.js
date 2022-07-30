@@ -4,6 +4,7 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
     $scope.listChats = [];
     $scope.listPrioridad = [];
     $scope.userNames = '';
+    $scope.userid = 0;
     $scope.listf2fChat = [];
     $scope.idchat = 0;
     $scope.idcliento = 0;
@@ -25,26 +26,28 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
                 headers: { 'Content-Type': undefined }
             }).then(function success(response) {
                 $scope.scrollChatBottom();
-                $scope.f2fChat(chtclient[0].id_cliente); 
+                $scope.f2fChat(chtclient[0].id_cliente);
                 $scope.form.message = '';
             }
             );
         }
     }
     angular.element(window.document.body).ready(function () {
+        let data = JSON.parse(sessionStorage.getItem('user'));
+        $scope.userid = data['id']
         listaChat();
         prioridad();
         $scope.scrollChatBottom();
     });
     var prioridad = function () {
-        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=prioridad&search=').then(function (result) {
+        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=prioridad&search=' + $scope.userid).then(function (result) {
             var c = result.data;
             $scope.listPrioridad = c
             $timeout(prioridad, 500);
         });
     }
     var listaChat = function () {
-        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=').then(function (result) {
+        $http.get(window.location.origin + '/v1/helpdesk-chat/0?length=lsChat&search=' + $scope.userid).then(function (result) {
             var c = result.data;
             $scope.listChats = c
         });
@@ -65,18 +68,22 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
                     var c = result.data;
                     $scope.listf2fChat = c
                     $scope.userNames = c[0].razon_social + '-' + c[0].names + '' + c[0].last_name
-                    $scope.scrollChatBottom();
+                    $scope.scrollChatBottom($scope.identi);
                 });
             }
         }
         $timeout(f2fChatGuardar, 500);
     }
-    $scope.scrollChatBottom = function () {
-        let identi = 0;
-        if (identi == 3) {
-            identi = 0;
+    $scope.identi = 0;
+    $scope.funcin = function (i){
+        $scope.identi = 0;
+    }
+    $scope.scrollChatBottom = function (c) {
+        //$scope.identi = 0;
+        if ($scope.identi > 3) {
+            $scope.identi = c;
         } else {
-            $identi = identi + 1;
+            $scope.identi = $scope.identi + 1;
             var objDiv = document.getElementById("messageschat");
             objDiv.scrollTop = objDiv.scrollHeight;
         }
@@ -96,6 +103,23 @@ ordenes.controller('ctrHelpdesk', function ($scope, $http, $timeout) {
             alertify.success("OK: se agrego el chat como critico:" + response.data + "");
         },
             function error(response) { alertify.error("ERROR: no se agrego el chat."); }
+        );
+    }
+
+    $scope.otraArea = function (i) {
+        var id = $scope.idchat;
+        var formt = new FormData();
+        formt.append('data', JSON.stringify({ id: id, id_area: i }));
+        formt.append('formulario', 'OTROS');
+        $http({
+            method: 'POST',
+            url: window.location.origin + '/v1/helpdesk-chat',
+            data: formt,
+            headers: { 'Content-Type': undefined }
+        }).then(function success(response) {
+            alertify.success("OK: se derivo el chat");
+        },
+            function error(response) { alertify.error("ERROR: no se derivo el chat."); }
         );
     }
 
@@ -161,11 +185,21 @@ try {
             .scope()
             .hacerCritico(i);
     }
+    function derivando(i) {
+        angular
+            .element(document.querySelector('[ng-controller="ctrHelpdesk"]'))
+            .scope()
+            .otraArea(i);
+    }
 } catch (error) {
     //error
 }
 
-function  scrollChatBottom() {
+function hsscrollChatBottom() {
+    angular
+        .element(document.querySelector('[ng-controller="ctrHelpdesk"]'))
+        .scope()
+        .funcin(0); //actualizar precio
     var objDiv = document.getElementById("messageschat");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
