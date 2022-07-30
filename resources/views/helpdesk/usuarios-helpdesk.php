@@ -55,14 +55,14 @@
                         </section>
                     </div>
                     <!-- SECCION DE CHAT F2F -->
-                    <div class="col-lg-6 border border-primary p-0" style="height: 550px">
+                    <div class="col-lg-6 border border-primary p-0" style="height: 580px">
                         <section class="chat ">
                             <div class="header-chat">
                                 <i class="icon fa fa-user-o" aria-hidden="true"></i>
                                 <p class="name">{{userNames}}</p>
                                 <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
                             </div>
-                            <div id="messageschat" class="messages-chat mb-5" style="height: 470px;overflow-y: scroll;">
+                            <div id="messageschat" class="messages-chat mb-5" style="height: 490px;overflow-y: scroll;">
                                 <div ng-repeat="lf in listf2fChat" style="background-color: transparent;">
                                     <div ng-if="lf.id_helpdesk ===null">
                                         <div class="message">
